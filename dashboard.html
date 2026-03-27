@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard - DB Solutions</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family: 'Segoe UI', sans-serif;
+  background:linear-gradient(rgba(10,37,64,0.85),rgba(10,37,64,0.95)),
+  url('https://images.unsplash.com/photo-1497366216548-37526070297c');
+  background-size:cover;
+  color:white;
+}
+
+/* Navbar */
+.navbar{
+  display:flex;
+  justify-content:space-between;
+  padding:15px 40px;
+  background:rgba(0,0,0,0.3);
+  backdrop-filter:blur(10px);
+}
+
+.logo{
+  font-size:22px;
+  font-weight:bold;
+}
+
+.user{
+  font-size:16px;
+  opacity:0.9;
+}
+
+/* Main */
+.container{
+  text-align:center;
+  margin-top:80px;
+}
+
+h1{
+  font-size:38px;
+  margin-bottom:10px;
+}
+
+.sub{
+  opacity:0.8;
+  margin-bottom:40px;
+}
+
+/* Cards */
+.cards{
+  display:flex;
+  justify-content:center;
+  gap:40px;
+  flex-wrap:wrap;
+}
+
+.card{
+  width:280px;
+  padding:30px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(15px);
+  box-shadow:0 10px 30px rgba(0,0,0,0.3);
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 20px 40px rgba(0,0,0,0.5);
+}
+
+.card h2{
+  margin-bottom:10px;
+}
+
+.card p{
+  opacity:0.7;
+  margin-bottom:20px;
+}
+
+/* Buttons */
+.btn{
+  padding:12px 20px;
+  border:none;
+  border-radius:30px;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+  background:linear-gradient(90deg,#00c6ff,#0072ff);
+  box-shadow:0 0 20px rgba(0,198,255,0.5);
+  transition:0.3s;
+}
+
+.btn:hover{
+  transform:scale(1.05);
+}
+
+/* Footer */
+.footer{
+  margin-top:80px;
+  text-align:center;
+  font-size:14px;
+  opacity:0.7;
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+  <div class="logo">DB Solutions</div>
+  <div class="user" id="username">Hi, User 👋</div>
+</div>
+
+<div class="container">
+  <h1>Welcome to Your Dashboard</h1>
+  <p class="sub">Access jobs & apply instantly</p>
+
+  <div class="cards">
+
+    <div class="card">
+      <h2>View Jobs</h2>
+      <p>Check latest job openings</p>
+      <button class="btn" onclick="openJobs()">Open Jobs</button>
+    </div>
+
+    <div class="card">
+      <h2>Apply Now</h2>
+      <p>Quick application process</p>
+      <button class="btn" onclick="applyNow()">Apply</button>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer">
+  DB Solutions • Manpower & Career Platform
+</div>
+
+<script>
+// Links
+function openJobs(){
+  window.open("https://whatsapp.com/channel/0029Vb0Cqmf1CYoYmdhbJd3F","_blank");
+}
+
+function applyNow(){
+  window.open("https://forms.gle/XsGnnfuXWp5b59qH8","_blank");
+}
+
+// User name from Google login (Firebase)
+const userName = localStorage.getItem("userName");
+if(userName){
+  document.getElementById("username").innerText = "Hi, " + userName + " 👋";
+}
+</script>
+
+</body>
+</html>

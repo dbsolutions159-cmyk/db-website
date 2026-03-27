@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DB Solutions</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Poppins',sans-serif;
+  color:white;
+}
+
+/* NAVBAR */
+.navbar{
+  position:fixed;
+  width:100%;
+  top:0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 50px;
+  backdrop-filter:blur(12px);
+  background:rgba(0,0,0,0.4);
+  z-index:1000;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:700;
+}
+
+.right{
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:white;
+  margin:0 10px;
+}
+
+.login-btn{
+  padding:8px 18px;
+  border-radius:25px;
+  border:1px solid #00c6ff;
+  background:rgba(255,255,255,0.1);
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.login-btn:hover{
+  background:#00c6ff;
+}
+
+/* HERO */
+.hero{
+  height:100vh;
+  background:linear-gradient(rgba(10,37,64,0.85),rgba(10,37,64,0.85)),
+  url('https://images.unsplash.com/photo-1497366216548-37526070297c');
+  background-size:cover;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
+}
+
+.hero h1{
+  font-size:50px;
+}
+
+.hero p{
+  margin-top:15px;
+  opacity:0.9;
+  font-size:18px;
+}
+
+/* CTA BUTTON */
+.cta{
+  margin-top:30px;
+  padding:14px 35px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(45deg,#00c6ff,#0072ff);
+  color:white;
+  font-size:17px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.cta:hover{
+  transform:scale(1.08);
+}
+
+/* SECTION */
+.section{
+  padding:80px 50px;
+  text-align:center;
+  background:#0a2540;
+}
+
+.cards{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
+  margin-top:30px;
+}
+
+.card{
+  background:#112e4a;
+  padding:25px;
+  border-radius:12px;
+  width:250px;
+}
+
+/* FOOTER */
+.footer{
+  padding:40px;
+  text-align:center;
+  background:#061a2c;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">DB Solutions</div>
+
+  <div class="right">
+    <div class="nav-links">
+      <a href="#">About</a>
+      <a href="career.html">Careers</a>
+      <a href="#">Contact</a>
+    </div>
+    <button class="login-btn" onclick="login()">Login / Sign Up</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Build Your Career with DB Solutions</h1>
+  <p>Empowering Careers with 3000+ Successful Placements Across India</p>
+
+  <button class="cta" onclick="login()">Get Started with Google</button>
+</div>
+
+<!-- ABOUT -->
+<div class="section">
+  <h2>About DB Solutions</h2>
+  <p style="margin-top:20px;max-width:750px;margin:auto;">
+    DB Solutions is a fast-growing manpower outsourcing and placement company dedicated to connecting talented candidates with the right career opportunities.
+    We specialize in hiring across finance, operations, customer support, and work-from-home roles across India.
+    With a strong hiring network, we have successfully placed over <b>3000+ candidates</b> across India.
+  </p>
+</div>
+
+<!-- WHY US -->
+<div class="section">
+  <h2>Why Choose Us</h2>
+
+  <div class="cards">
+    <div class="card">3000+ Candidates Placed</div>
+    <div class="card">PAN India Hiring</div>
+    <div class="card">WFH & Office Jobs</div>
+    <div class="card">Fast Hiring Process</div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="section">
+  <h2>How It Works</h2>
+  <p style="margin-top:20px;">
+    Login → View Jobs → Apply → Complete Registration → Get Placed
+  </p>
+</div>
+
+<!-- CONTACT -->
+<div class="section">
+  <h2>Contact Us</h2>
+  <p>📞 7987107059</p>
+  <p>📧 dbsolutionmopa@zohomail.in</p>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  © 2026 DB Solutions | All Rights Reserved
+</div>
+
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyD_Ga-Mi9EPdi9gtJWkXA7fgqea",
+  authDomain: "dbsolutions-career.firebaseapp.com",
+  projectId: "dbsolutions-career",
+  storageBucket: "dbsolutions-career.appspot.com",
+  messagingSenderId: "672960239523",
+  appId: "1:672960239523:web:9249f5b4e3d8eb",
+  measurementId: "G-XGD5ZM9MYC"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+function login(){
+  const provider = new firebase.auth.GoogleAuthProvider();
+
+  firebase.auth().signInWithPopup(provider)
+  .then(result => {
+    const user = result.user;
+    localStorage.setItem("name", user.displayName);
+    window.location.href = "dashboard.html";
+  })
+  .catch(error => {
+    alert(error.message);
+  });
+}
+</script>
+
+</body>
+</html>
