@@ -1,148 +1,162 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
 <title>Dashboard - DB Solutions</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{
   margin:0;
-  font-family: 'Segoe UI', sans-serif;
-  background:linear-gradient(rgba(10,37,64,0.85),rgba(10,37,64,0.95)),
-  url('https://images.unsplash.com/photo-1497366216548-37526070297c');
-  background-size:cover;
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(135deg,#0a2540,#1e3c72);
   color:white;
 }
 
-/* Navbar */
+/* NAVBAR */
 .navbar{
   display:flex;
   justify-content:space-between;
-  padding:15px 40px;
+  padding:15px 30px;
   background:rgba(0,0,0,0.3);
   backdrop-filter:blur(10px);
 }
 
 .logo{
-  font-size:22px;
+  font-size:20px;
   font-weight:bold;
 }
 
 .user{
-  font-size:16px;
-  opacity:0.9;
+  font-size:14px;
 }
 
-/* Main */
+/* BADGE */
+.badge{
+  background:#00c6ff;
+  color:black;
+  padding:5px 10px;
+  border-radius:10px;
+  font-size:12px;
+  margin-left:10px;
+}
+
+/* MAIN */
 .container{
-  text-align:center;
-  margin-top:80px;
+  padding:40px;
 }
 
-h1{
-  font-size:38px;
-  margin-bottom:10px;
+.title{
+  font-size:30px;
 }
 
 .sub{
   opacity:0.8;
-  margin-bottom:40px;
+  margin-top:5px;
+  margin-bottom:30px;
 }
 
-/* Cards */
+/* CARDS */
 .cards{
   display:flex;
-  justify-content:center;
-  gap:40px;
+  gap:20px;
   flex-wrap:wrap;
 }
 
 .card{
-  width:280px;
-  padding:30px;
-  border-radius:20px;
   background:rgba(255,255,255,0.08);
   backdrop-filter:blur(15px);
-  box-shadow:0 10px 30px rgba(0,0,0,0.3);
+  padding:25px;
+  border-radius:15px;
+  width:260px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.4);
   transition:0.3s;
 }
 
 .card:hover{
   transform:translateY(-10px);
-  box-shadow:0 20px 40px rgba(0,0,0,0.5);
 }
 
-.card h2{
-  margin-bottom:10px;
+.card h3{
+  margin:0;
 }
 
-.card p{
-  opacity:0.7;
-  margin-bottom:20px;
-}
-
-/* Buttons */
+/* BUTTON */
 .btn{
-  padding:12px 20px;
+  margin-top:15px;
+  padding:10px;
+  width:100%;
   border:none;
-  border-radius:30px;
+  border-radius:25px;
+  background:linear-gradient(45deg,#00c6ff,#0072ff);
   color:white;
-  font-weight:bold;
   cursor:pointer;
-  background:linear-gradient(90deg,#00c6ff,#0072ff);
-  box-shadow:0 0 20px rgba(0,198,255,0.5);
-  transition:0.3s;
 }
 
-.btn:hover{
-  transform:scale(1.05);
-}
-
-/* Footer */
-.footer{
-  margin-top:80px;
-  text-align:center;
-  font-size:14px;
-  opacity:0.7;
+/* LOGOUT */
+.logout{
+  background:#ff4d4d;
+  border:none;
+  padding:8px 15px;
+  border-radius:20px;
+  color:white;
+  cursor:pointer;
 }
 </style>
 </head>
 
 <body>
 
+<!-- NAVBAR -->
 <div class="navbar">
   <div class="logo">DB Solutions</div>
-  <div class="user" id="username">Hi, User 👋</div>
+  <div class="user">
+    <span id="username"></span>
+    <span class="badge">Verified Candidate</span>
+    <button class="logout" onclick="logout()">Logout</button>
+  </div>
 </div>
 
+<!-- MAIN -->
 <div class="container">
-  <h1>Welcome to Your Dashboard</h1>
-  <p class="sub">Access jobs & apply instantly</p>
+  <div class="title">Secure Dashboard 🔒</div>
+  <div class="sub">Access granted after successful authentication</div>
 
   <div class="cards">
 
     <div class="card">
-      <h2>View Jobs</h2>
-      <p>Check latest job openings</p>
-      <button class="btn" onclick="openJobs()">Open Jobs</button>
+      <h3>Explore Jobs</h3>
+      <p>Latest verified job openings</p>
+      <button class="btn" onclick="openJobs()">View Jobs</button>
     </div>
 
     <div class="card">
-      <h2>Apply Now</h2>
-      <p>Quick application process</p>
+      <h3>Apply Now</h3>
+      <p>Submit your application quickly</p>
       <button class="btn" onclick="applyNow()">Apply</button>
+    </div>
+
+    <div class="card">
+      <h3>Complete Profile</h3>
+      <p>Improve your selection chances</p>
+      <button class="btn">Update</button>
     </div>
 
   </div>
 </div>
 
-<div class="footer">
-  DB Solutions • Manpower & Career Platform
-</div>
-
 <script>
-// Links
+
+// 🔐 LOGIN CHECK
+const user = localStorage.getItem("userName");
+
+if(!user){
+  window.location.href = "index.html";
+}
+
+// SHOW NAME
+document.getElementById("username").innerText = "Hi, " + user;
+
+// ACTIONS
 function openJobs(){
   window.open("https://whatsapp.com/channel/0029Vb0Cqmf1CYoYmdhbJd3F","_blank");
 }
@@ -151,11 +165,12 @@ function applyNow(){
   window.open("https://forms.gle/XsGnnfuXWp5b59qH8","_blank");
 }
 
-// User name from Google login (Firebase)
-const userName = localStorage.getItem("userName");
-if(userName){
-  document.getElementById("username").innerText = "Hi, " + userName + " 👋";
+// LOGOUT
+function logout(){
+  localStorage.clear();
+  window.location.href = "index.html";
 }
+
 </script>
 
 </body>
